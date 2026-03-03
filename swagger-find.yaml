@@ -1,0 +1,130 @@
+id: swagger-api
+
+info:
+  name: Public Swagger API - Detect
+  author: pdteam,c-sh0,AmirHossein Raeisi,Eduardo Quintanilha,optimized-by-you
+  severity: info
+  description: |
+    Public Swagger / OpenAPI endpoint detected.
+  reference:
+    - https://swagger.io/
+  classification:
+    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cwe-id: CWE-200
+  metadata:
+    verified: true
+    max-request: 120
+    shodan-query: 'http.title:"swagger"'
+  tags: exposure,api,swagger,openapi,discovery
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}{{paths}}"
+
+    payloads:
+      paths:
+
+        # Core Docs
+        - "/swagger"
+        - "/swagger/"
+        - "/swagger-ui"
+        - "/swagger-ui/"
+        - "/swagger-ui.html"
+        - "/swagger-ui/index.html"
+        - "/swagger-ui.html#/"
+        - "/swagger-ui/index.html#/"
+        - "/api-docs"
+        - "/api-docs/"
+        - "/v1/api-docs"
+        - "/v2/api-docs"
+        - "/v3/api-docs"
+
+        # OpenAPI
+        - "/openapi.json"
+        - "/openapi.yaml"
+        - "/openapi.yml"
+        - "/openapi/"
+        - "/openapi/v1/"
+        - "/openapi/v2/"
+        - "/openapi/v3/"
+
+        # Swagger JSON/YAML
+        - "/swagger.json"
+        - "/swagger.yaml"
+        - "/swagger.yml"
+        - "/swagger/v1/swagger.json"
+        - "/swagger/v2/swagger.json"
+        - "/swagger/v3/swagger.json"
+        - "/v1/swagger.yaml"
+        - "/v2/swagger.yaml"
+        - "/v3/swagger.yaml"
+
+        # API Prefix Variants
+        - "/api/swagger"
+        - "/api/swagger-ui"
+        - "/api/swagger-ui.html"
+        - "/api/swagger.json"
+        - "/api/swagger.yaml"
+        - "/api/openapi"
+        - "/api/openapi.json"
+        - "/api/openapi.yaml"
+        - "/api/v1/swagger.json"
+        - "/api/v2/swagger.json"
+        - "/api/v3/swagger.json"
+        - "/api/v1/openapi.json"
+        - "/api/v2/openapi.json"
+        - "/api/v3/openapi.json"
+
+        # Swagger Resources
+        - "/swagger-resources"
+        - "/swagger-resources/configuration/ui"
+        - "/swagger-resources/configuration/security"
+        - "/swagger-resources/swagger.json"
+        - "/swagger-resources/openapi.json"
+        - "/api/swagger-resources"
+        - "/api/swagger-resources/configuration/ui"
+        - "/api/swagger-resources/configuration/security"
+
+        # Docs Variants
+        - "/docs"
+        - "/docs/"
+        - "/documentation"
+        - "/documentation/swagger"
+        - "/documentation/openapi"
+        - "/api/documentation"
+
+        # Common UI Bundles
+        - "/swagger-ui-bundle.js"
+        - "/swagger-ui/swagger-ui.js"
+        - "/swagger-ui/springfox.js"
+        - "/webjars/swagger-ui/index.html"
+        - "/webjars/swagger-ui/swagger-ui-bundle.js"
+
+    headers:
+      Accept: text/html, application/json
+
+    stop-at-first-match: true
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "swagger:"
+          - "Swagger 2.0"
+          - "\"swagger\":"
+          - "Swagger UI"
+          - "openapi:"
+          - "id=\"swagger-ui"
+        condition: or
+
+      - type: status
+        status:
+          - 200
+
+    extractors:
+      - type: regex
+        part: body
+        group: 1
+        regex:
+          - "@version[[:space:]]+(v?[0-9]+\\.[0-9]+\\.[0-9]+)"
